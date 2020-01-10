@@ -1,8 +1,8 @@
-from  pktools.deuces import Deck, Evaluator, Card
+from pktools.deuces import Deck, Evaluator, Card
 import numpy as np
 import pandas as pd
-import signal
-import concurrent.futures
+from tournament.timeout import timeout
+
 
 """
 Game pseudo_code:
@@ -15,19 +15,6 @@ loop -> Game starts round
              -> player updates status
     -> Game distributes round gains
 """
-
-def timeout_raiser(signal_number, frame):
-    raise TimeoutError("")
-
-#TODO: Delete this function (only for test)
-def algo_0(input):
-    rand_nb = np.random.rand()
-    if rand_nb < 0.7:
-        return 'call'
-    elif rand_nb > 0.8:
-        return input['current raise'] - input['player info'][3] + input['minimum raise']
-    else:
-        return 'fold'
 
 class Player:
     def __init__(self, model, ID, stack = 1000 ):
@@ -71,7 +58,7 @@ class Player:
         self.bet -= amount
         return amount
 
-    def make_decision(self, input, current_raise, minimum_raise):
+    def make_decision(self, input, current_raise, minimum_raise, time_delay):
         """
         Here we call the decision algorithm, implement its decision or make
         sure it provides a legal decision
@@ -81,11 +68,11 @@ class Player:
         :return:
         """
 
-        signal.alarm(timeout)
         try:
-            decision = self.model(input)
-        except TimeoutError:
+            decision = timeout(time_delay=time_delay)(self.model)(input)
+        except Exception:
             decision = 'timeout'
+
         self.last_action = decision
 
         calling_bet = current_raise - self.bet
@@ -96,15 +83,14 @@ class Player:
         if decision == 'fold':
             self.round_status = 'out'
             print('player %d folds' % self.ID)
-
         elif decision == 'timeout':
             self.round_status = 'out'
             print('player %d timed out' % self.ID)
-
+        elif decision == 'all in':
+            self.__bet(self.stack)
         elif decision == 'call':
             self.__bet(calling_bet)
             print('player %d calls' % self.ID)
-
         else:
             try:
                 # checking if the decision is a value to bet
@@ -173,7 +159,6 @@ class Game:
         self.game_logger = [] # list of dict [{init_round_status, round_logger, final_round_status}]
         self.input_dict = {'player': [], 'opponents': [], 'round':[], 'game':[]}
 
-        signal.signal(signal.SIGALRM, timeout_raiser)
 
     def play_game(self, n_rounds=100):
 
@@ -347,7 +332,8 @@ class Game:
 
                 player.make_decision(input=self.__make_input(player, current_raise),
                                      current_raise=current_raise,
-                                     minimum_raise=self.minimum_raise)
+                                     minimum_raise=self.minimum_raise,
+                                     time_delay=self.timeout)
 
                 # updating the data for the input dict
                 player_data = player.get_player_data()
@@ -392,14 +378,3 @@ class Game:
         print("community:")
         Card.print_pretty_cards(self.community_cards)
 
-for _ in range(50):
-    game = Game('', [algo_0 for _ in range(6)])
-    game.play_game(100)
-
-
-# TODO: """
-#  logging for the output,
-#  creating a standard for the input (based on output)
-#  creating a standard for the model search
-#  creating testing
-#  """
