@@ -1,14 +1,31 @@
 from  pktools.deuces import Deck, Evaluator, Card
 import numpy as np
 import pandas as pd
+import signal
+import concurrent.futures
 
-#TO DELETE
-def algo_0(minimum_raise):
+"""
+Game pseudo_code:
+
+loop -> Game starts round
+    loop -> Game starts turn
+        loop -> Game creates input
+             -> Game calls player action(input)
+             -> player calls model decision(input)
+             -> player updates status
+    -> Game distributes round gains
+"""
+
+def timeout_raiser(signal_number, frame):
+    raise TimeoutError("")
+
+#TODO: Delete this function (only for test)
+def algo_0(input):
     rand_nb = np.random.rand()
     if rand_nb < 0.7:
         return 'call'
     elif rand_nb > 0.8:
-        return minimum_raise
+        return input['current raise'] - input['player info'][3] + input['minimum raise']
     else:
         return 'fold'
 
@@ -21,9 +38,18 @@ class Player:
         self.bet = 0
         self.game_status = 'in'
         self.round_status = 'in'
+        self.last_action = ''
+
+    def get_player_data(self):
+        """returns a quick snapshot of player status, for logging and model's input"""
+        return self.ID, self.last_action, self.stack, self.bet, self.round_status
 
     def __bet(self, amount):
-
+        """
+        applies the betting of a given amount (handles when amount > stack)
+        :param amount: amount to be bet by the player
+        :return:
+        """
         if self.round_status != 'in':
             raise(PermissionError('Out or all in player cannot bet'))
 
@@ -35,21 +61,34 @@ class Player:
         self.stack -= amount
 
     def bet2pot(self, amount):
+        """
+        Transfers the money from the bet into the pot
+        :param amount: value of the pot
+        :return:
+        """
         if amount > self.bet :
             amount = self.bet
         self.bet -= amount
         return amount
 
-    def make_decision(self, input, call_value, minimum_raise):
+    def make_decision(self, input, current_raise, minimum_raise):
         """
         Here we call the decision algorithm, implement its decision or make
         sure it provides a legal decision
         :param input: input to provide to the decision algorithm (std to be defined)
-        :param call_value: what is the current highest bet
+        :param current_raise: what is the current highest bet
         :param minimum_raise: what is the minimum amount for a raise
         :return:
         """
-        decision = self.model(minimum_raise + call_value - self.bet)
+
+        signal.alarm(timeout)
+        try:
+            decision = self.model(input)
+        except TimeoutError:
+            decision = 'timeout'
+        self.last_action = decision
+
+        calling_bet = current_raise - self.bet
 
         # The output of the algorithm must be 'fold', 'call' or an int (or string of an int)
         # corresponding to a valib sum to bet (call value, all in, or raise above the minimum raise)
@@ -57,15 +96,21 @@ class Player:
         if decision == 'fold':
             self.round_status = 'out'
             print('player %d folds' % self.ID)
+
+        elif decision == 'timeout':
+            self.round_status = 'out'
+            print('player %d timed out' % self.ID)
+
         elif decision == 'call':
-            self.__bet(call_value - self.bet)
+            self.__bet(calling_bet)
             print('player %d calls' % self.ID)
+
         else:
             try:
                 # checking if the decision is a value to bet
                 to_bet = int(decision)
                 # check if the value correspond to calling
-                if to_bet == (call_value - self.bet):
+                if to_bet == (calling_bet):
                     self.__bet(to_bet)
                     print('player %d calls' % self.ID)
                 # check if the value correspond to all in
@@ -73,7 +118,7 @@ class Player:
                     self.__bet(to_bet)
                     print('player %d goes all in' % self.ID)
                 # check if the value corresponds to a legal raise
-                elif (to_bet + self.bet) >= (call_value + minimum_raise):
+                elif (to_bet + self.bet) >= (current_raise + minimum_raise):
                     self.__bet(to_bet)
                     print('player %d raises' % self.ID)
                 else:
@@ -82,8 +127,8 @@ class Player:
                                         Must be the call value(%d), all in(>%d), or 
                                         a raise greater than %d.
                                         Instead got %s"""
-                                     % ((call_value - self.bet), self.stack,
-                                        (call_value + minimum_raise - self.bet),str(to_bet)))
+                                     % ((calling_bet), self.stack,
+                                        (calling_bet + minimum_raise),str(to_bet)))
             except ValueError:
                 # here the output is neither 'fold', 'call', or a betting int
                 raise ValueError('output of decision algorithm must be fold, call or an int raise value'
@@ -102,17 +147,19 @@ class Player:
 
 class Game:
 
-    def __init__(self, log_file):
+    def __init__(self,log_file, models: list, tournament_id: str = 'none'):
 
+        self.tournament_id = tournament_id
         self.initial_stack = 1000
         self.blind = 10
         self.minimum_raise = 10
+        self.timeout = 5 # in seconds
 
         self.deck = Deck()
         self.log_file = log_file
 
         self.players = [Player(model=model, ID=ID, stack=self.initial_stack)
-                        for ID, model in enumerate(self.__get_models())]
+                        for ID, model in enumerate(models)]
 
         self.community_cards = []
 
@@ -121,6 +168,12 @@ class Game:
         self.turn_nb = 0
         self.dealer = 0
 
+        self.players_info = [] # list of tuples [player ID][player feature]; player feature = (ID, last_action, stack, bet, round_status)
+        self.round_logger = [] # list of list of tuple [turn nb][action nb][player feature]
+        self.game_logger = [] # list of dict [{init_round_status, round_logger, final_round_status}]
+        self.input_dict = {'player': [], 'opponents': [], 'round':[], 'game':[]}
+
+        signal.signal(signal.SIGALRM, timeout_raiser)
 
     def play_game(self, n_rounds=100):
 
@@ -135,12 +188,20 @@ class Game:
 
         return
 
-    def __get_game_nb(self):
-        return
+    def __get_game_metadata(self):
+        return {'n_players': self.n_players,
+                'blind': self.blind,
+                'minimum raise': self.minimum_raise,
+                'timeout': self.timeout,
+                'initial stack': self.initial_stack}
 
-    @staticmethod
-    def __get_models():
-        return [algo_0 for _ in range(6)]
+    def __get_round_data(self):
+        players_in = [i for i,player in enumerate(self.players) if player.game_status == 'in']
+        return {'round_nb': self.round_nb,
+                'players in': players_in,
+                'community': self.community_cards,
+                'hands': [self.players[p].hand for p in players_in],
+                'stacks': [self.players[p].stack for p in players_in]}
 
     def __update_community(self):
         # card increment based on which round we are in
@@ -175,7 +236,6 @@ class Game:
         """
         We spread the bets into pots, so that player all in who couldn't match the raise
         are eligible only to the smaller pots.
-
         :return:
         """
         # we make sure there is a 0 bet
@@ -208,6 +268,11 @@ class Game:
 
     def __next_round(self):
 
+        # reinitializing/updating round data
+
+        self.players_info = [player.get_player_data() for player in self.players]
+        self.round_logger = []
+
         self.dealer += 1
         self.turn_nb = 0
         self.dealer %= self.n_players
@@ -217,12 +282,17 @@ class Game:
         self.community_cards = []
 
         print('Starting round %d with players %s'
-              % (self.round_nb, str([player.ID for player in self.players
+              % (self.round_nb, str([i for i,player in enumerate(self.players)
                                      if player.game_status == 'in'])))
 
         for player in self.players:
             if player.game_status == 'in':
                 player.new_round(hand=self.deck.draw(2), blind=self.blind)
+
+        # logging
+        self.game_logger += [{'initial status':None ,'round logs':None,'final status':None}]
+        self.game_logger[-1]['initial status'] = self.__get_round_data()
+
 
         # running the 4 betting turns
         for _ in range(4):
@@ -240,10 +310,16 @@ class Game:
                 player.game_status = 'out'
                 player.round_status = 'out'
 
+        # logging
+        self.game_logger[-1]['round logs'] = self.round_logger
+        self.game_logger[-1]['final status'] = self.__get_round_data()
+
 
         self.display()
 
     def __next_turn(self):
+
+        self.round_logger += [[]]
         self.__update_community()
 
         print('\n turn %d' % self.turn_nb)
@@ -252,8 +328,8 @@ class Game:
 
         # Betting round
 
-        highest_bet = max([player.bet for player in self.players]) # current raise value
-        player = self.dealer # player starting to bet
+        current_raise = max([player.bet for player in self.players]) # current raise value
+        who_plays = self.dealer # player starting to bet
         last_update = 0 # when was the last raise
 
         # n_active_players is initialized by counting all the 'in' players
@@ -263,25 +339,48 @@ class Game:
         n_active_players = sum([player.round_status == 'in' for player in self.players])
         while last_update < self.n_players and n_active_players >= 2:
             # insure a circular iteration of all players
-            player %= self.n_players
-            # checks if player is still playing (excluding all in)
-            if self.players[player].round_status == 'in':
+            who_plays %= self.n_players
+            player = self.players[who_plays]
 
-                self.players[player].make_decision(input=None,
-                                                   call_value=highest_bet,
-                                                   minimum_raise=self.minimum_raise)
-                if self.players[player].round_status == 'out':
+            # checks if player is still playing (excluding all in)
+            if player.round_status == 'in':
+
+                player.make_decision(input=self.__make_input(player, current_raise),
+                                     current_raise=current_raise,
+                                     minimum_raise=self.minimum_raise)
+
+                # updating the data for the input dict
+                player_data = player.get_player_data()
+                self.round_logger[-1] += [player_data]
+                self.players_info[player.ID] = player_data
+
+                if player.round_status == 'out':
                     n_active_players -= 1
                 # check if a raise has happened
-                if self.players[player].bet > highest_bet:
-                    highest_bet = self.players[player].bet
+                if player.bet > current_raise:
+                    current_raise = player.bet
                     last_update = 0
 
             last_update += 1
-            player += 1
+            who_plays += 1
 
         # End of betting round
         self.turn_nb += 1
+
+    def __save_game_log(self):
+        return
+
+    def __make_input(self, player, current_raise):
+        return {**self.__get_game_metadata(),
+                'current raise': current_raise,
+                'pot': sum([player.bet for player in self.players]),
+                'community': self.community_cards,
+                'hand': player.hand,
+                'player info':player.get_player_data(),
+                'others info': self.players_info,
+                'round history': self.round_logger,
+                'game history': self.game_logger[:-1]}
+        # [:-1] -> very important to not give last round info (contains all the hands values)
 
     def display(self):
         for player in self.players:
@@ -293,8 +392,9 @@ class Game:
         print("community:")
         Card.print_pretty_cards(self.community_cards)
 
-game = Game('')
-game.play_game(1)
+for _ in range(50):
+    game = Game('', [algo_0 for _ in range(6)])
+    game.play_game(100)
 
 
 # TODO: """
