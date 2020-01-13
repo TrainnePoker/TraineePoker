@@ -1,6 +1,7 @@
 from datetime import datetime
-
-from pktools.deuces import Deck, Evaluator, Card
+from pktools.deuces.evaluator import Evaluator
+from pktools.deuces.card import Card
+from pktools.deuces.deck import Deck
 import numpy as np
 import pandas as pd
 from tournament.timeout import timeout
