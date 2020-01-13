@@ -1,8 +1,15 @@
+import os
+import sys, inspect
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
 from tournament.poker_game import Game
 import importlib
-import os
 
-list_models_name = os.listdir(os.path.dirname(os.path.abspath(__file__)) +'\\..\\models' )
+# TODO: remove the *3 used here to duplicate models
+list_models_name = os.listdir(os.path.dirname(os.path.abspath(__file__)) +'\\..\\models' ) * 3
 
 if len(list_models_name) % 6 == 1:
     list_models_name += [list_models_name[0]]

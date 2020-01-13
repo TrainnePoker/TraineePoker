@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pktools.deuces import Deck, Evaluator, Card
 import numpy as np
 import pandas as pd
@@ -354,6 +356,35 @@ class Game:
         self.turn_nb += 1
 
     def __save_game_log(self):
+
+        def get_player_status(status_dict):
+            status_string = ""
+            pass
+
+        file = open(self.log_file, "a+")
+
+        # writing game meta data
+        file.write("tournament ID: "+str(self.tournament_id))
+        file.write("game date: "+datetime.now())
+        file.write("number of players: "+str(self.n_players))
+        model_list = ''
+        for player in self.players:
+            model_name = player.model.__module__.replace('.',' ').split()[-1]
+            model_list += "player %d -> %s , "% (player.ID, model_name)
+        file.write("models: " + model_list)
+
+        file.write("initial stack %d" % self.initial_stack)
+        file.write("blind value %d" % self.blind)
+        file.write("timeout %d" % self.timeout)
+        file.write("\n ###################\n STARTING GAME LOGGING \n###################\n")
+
+        for game_nb, game in enumerate(self.game_logger):
+           file.write("game nb: ",game_nb)
+
+           for round_number, round in enumerate(game['round logs']):
+               pass
+
+
         return
 
     def __make_input(self, player, current_raise):
