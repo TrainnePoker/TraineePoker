@@ -21,4 +21,3 @@ for i in range(0,len(list_models_name),6):
 
     game = Game( join(current_dir,"test.yaml"), models)
     game.play_game(30)
-print(game.game_logger)

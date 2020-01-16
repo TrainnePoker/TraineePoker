@@ -2,7 +2,7 @@ import numpy as np
 from pktools.feature_engineering.winning_prob import estimate_proba
 
 def make_decision(input):
-
+    
     proba = estimate_proba(input['hand'],input['community'], input['n_players'])
 
     if proba > 0.9:

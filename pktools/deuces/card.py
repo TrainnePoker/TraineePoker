@@ -33,55 +33,72 @@ class Card():
     # converstion from string => int
     CHAR_RANK_TO_INT_RANK = dict(zip(list(STR_RANKS), INT_RANKS))
     CHAR_SUIT_TO_INT_SUIT = {
-        's': 1,  # spades
-        'h': 2,  # hearts
-        'd': 4,  # diamonds
-        'c': 8,  # clubs
+        '♠': 1,  # spades
+        '❤': 2,  # hearts
+        '♦': 4,  # diamonds
+        '♣': 8,  # clubs
     }
     INT_SUIT_TO_CHAR_SUIT = 'xshxdxxxc'
 
     # for pretty printing
     PRETTY_SUITS = {
-        1: u"\u2660",  # spades
-        2: u"\u2764",  # hearts
-        4: u"\u2666",  # diamonds
-        8: u"\u2663"  # clubs
+        1: "♠",  # spades
+        2: "❤", # hearts
+        4: "♦",  # diamonds
+        8: "♣"  # clubs
     }
-    # PRETTY_SUITS = {
-    #     1 : u"\u2660".encode('utf-8'), # spades
-    #     2 : u"\u2764".encode('utf-8'), # hearts
-    #     4 : u"\u2666".encode('utf-8'), # diamonds
-    #     8 : u"\u2663".encode('utf-8') # clubs
-    # }
+
+
 
     # hearts and diamonds
     PRETTY_REDS = [2, 4]
 
     @staticmethod
-    def new(string):
+    def str_to_int(strings):
         """
         Converts Card string to binary integer representation of card, inspired by:
 
         http://www.suffecool.net/poker/evaluator.html
         """
 
-        rank_char = string[0]
-        suit_char = string[1]
-        rank_int = Card.CHAR_RANK_TO_INT_RANK[rank_char]
-        suit_int = Card.CHAR_SUIT_TO_INT_SUIT[suit_char]
-        rank_prime = Card.PRIMES[rank_int]
+        if type(strings) == str:
+            strings = [strings]
 
-        bitrank = 1 << rank_int << 16
-        suit = suit_int << 12
-        rank = rank_int << 8
+        cards = []
 
-        return bitrank | suit | rank | rank_prime
+        for string in strings:
+            rank_char = string[0]
+            suit_char = string[1]
+            rank_int = Card.CHAR_RANK_TO_INT_RANK[rank_char]
+            suit_int = Card.CHAR_SUIT_TO_INT_SUIT[suit_char]
+            rank_prime = Card.PRIMES[rank_int]
+
+            bitrank = 1 << rank_int << 16
+            suit = suit_int << 12
+            rank = rank_int << 8
+            cards += [bitrank | suit | rank | rank_prime]
+
+        if len(cards) == 1:
+            cards = cards[0]
+
+        return cards
 
     @staticmethod
-    def int_to_str(card_int):
-        rank_int = Card.get_rank_int(card_int)
-        suit_int = Card.get_suit_int(card_int)
-        return Card.STR_RANKS[rank_int] + Card.INT_SUIT_TO_CHAR_SUIT[suit_int]
+    def int_to_str(card_ints):
+
+        if type(card_ints) == int:
+            card_ints = [card_ints]
+
+        card_strings = []
+        for card_int in card_ints:
+            rank_int = Card.get_rank_int(card_int)
+            suit_int = Card.get_suit_int(card_int)
+            full_string = Card.STR_RANKS[rank_int] + Card.PRETTY_SUITS[suit_int]
+            card_strings += [full_string]
+
+        if len(card_strings) == 1:
+            card_strings = card_strings[0]
+        return card_strings
 
     @staticmethod
     def get_rank_int(card_int):
@@ -107,7 +124,7 @@ class Card():
         """
         bhand = []
         for c in card_strs:
-            bhand.append(Card.new(c))
+            bhand.append(Card.str_to_int(c))
         return bhand
 
     @staticmethod
