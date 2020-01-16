@@ -16,16 +16,16 @@
 
 To be picked up by the tournament simulation, a model needs to have the following element:
 
-    - it has a directory with the name: *model_name*
-    - this directory must contain a file: *model_name.py*
-    - this file must contain a function: make_decision(input)
-    - this function must take 1 input argument
-    - this function must return either:
-        - "fold"
-        - "call"
-        - "all in"
-        - "*int*"
-        - *int*
+- it has a directory with the name: *model_name*
+- this directory must contain a file: *model_name.py*
+- this file must contain a function: make_decision(input)
+- this function must take 1 input argument
+- this function must return either:
+    - "fold"
+    - "call"
+    - "all in"
+    - "*int*"
+    - *int*
 
 the simulation will call the 'make_decision' function, give it the input object and
 process the return of the function. It will makes sure the return is a legal decision (c.f poker rules paragraph).
@@ -44,25 +44,25 @@ process the return of the function. It will makes sure the return is a legal dec
 
  The simulation will provide an input dictionary to the model with the following structure as an example:
 
- 'blind': 10,                                    # (rule) value of big blind
- 'timeout': 5,                                   # (rule) how much time the model has to make decision
- 'community': ['2♣', 'K❤', '5♦', '8♠', '8❤'],  # list of community cards
- 'current raise': 90,                            # value of the current highest bet
- 'hand': ['K♠', 'J❤'],                          # cards of the player
- 'initial stack': 1000,                          # (rule) how much money everybody had at the beginning
- 'minimum raise': 10,                            # (rule) value of the minimum raise
- 'n_players': 3,                                 # number of players
- 'pot': 230,                                    # total money bet at this round
+    'blind': 10,                                    # (rule) value of big blind
+    'timeout': 5,                                   # (rule) how much time the model has to make decision
+    'community': ['2♣', 'K❤', '5♦', '8♠', '8❤'],  # list of community cards
+    'current raise': 90,                            # value of the current highest bet
+    'hand': ['K♠', 'J❤'],                          # cards of the player
+    'initial stack': 1000,                          # (rule) how much money everybody had at the beginning
+    'minimum raise': 10,                            # (rule) value of the minimum raise
+    'n_players': 3,                                 # number of players
+    'pot': 230,                                    # total money bet at this round
 
                                                 # dictionnary containing some of the player's data
- 'player info': {'ID': 0,                       # ID number
+    'player info': {'ID': 0,                       # ID number
                  'bet': 80,                     # how much he has bet at this round so far
                  'last_action': 20,             # the latest action he took
                  'stack': 900,                  # how much money left in the stack
                  'status': 'in'},               # his current game status
 
                                                 # 'others info' contains a list of dictionnary similar to 'player info' but for all the other players
- 'others info': [{'ID': 0,
+    'others info': [{'ID': 0,
                   'bet': 80,
                   'last_action': 20,
                   'stack': 900,
@@ -78,7 +78,7 @@ process the return of the function. It will makes sure the return is a legal dec
                   'stack': 950,
                   'status': 'in'}],
 
- 'round history': [
+    'round history': [
                    [{'ID': 2,                   # 'round history' is a list of list of 'action' dictionnary: [betting_round_nb][action_nb][action_key]
                      'bet': 10,                 # where each action dict contains a decision made by a player and data about the player of made the decision
                      'last_action': 'call',
@@ -127,7 +127,7 @@ process the return of the function. It will makes sure the return is a legal dec
                      'stack': 920,
                      'status': 'out'}]],
 
-'game history': [{                                                       # 'game history' is a list of dict providing the data about previous rounds [round_nb][round_key]
+    'game history': [{                                                       # 'game history' is a list of dict providing the data about previous rounds [round_nb][round_key]
                    'round_number': 0,                                    # each dict has some meta data about the given round (players infos and cards, winner(s) of the round, etc.)
                    'winner': [0]                                         # and the dicts contain the round history for all the rounds (same format as previous entry)
                    'community': ['Q♠', 'T♣', '3♦', '9♦', 'A❤'],         # NOTE: the players_info is taken at the end of the round, after the pot has been distributed
