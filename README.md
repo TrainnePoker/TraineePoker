@@ -12,25 +12,25 @@
 
 
 
-##Structure of a model:
+## Structure of a model:
 
- To be picked up by the tournament simulation, a model needs to have the following element:
+To be picked up by the tournament simulation, a model needs to have the following element:
+
     - it has a directory with the name: *model_name*
     - this directory must contain a file: *model_name.py*
     - this file must contain a function: make_decision(input)
     - this function must take 1 input argument
     - this function must return either:
-                                       - "fold"
-                                       - "call"
-                                       - "raise"
-                                       - "*int*"
-                                       - *int*
+        - "fold"
+        - "call"
+        - "all in"
+        - "*int*"
+        - *int*
 
-  the simulation will call the 'make_decision' function, give it the input object and
-  process the return of the function. It will makes sure the return is a legal decision (c.f poker rules paragraph).
+the simulation will call the 'make_decision' function, give it the input object and
+process the return of the function. It will makes sure the return is a legal decision (c.f poker rules paragraph).
 
-  WARNING: for robustness, the model has only 5 seconds to make a decision, after that, the simulation stops the function
-            and gives a default "fold" decision to the player.
+**WARNING**: for robustness, the model has only 5 seconds to make a decision, after that, the simulation stops the function and gives a default "fold" decision to the player.
 
 
 ## Rules of the poker simulation
