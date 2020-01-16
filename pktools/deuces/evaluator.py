@@ -1,7 +1,6 @@
 import itertools
-from deuces.card import Card
-from deuces.deck import Deck
-from deuces.lookup import LookupTable
+from pktools.deuces.card import Card
+from pktools.deuces.lookup import LookupTable
 
 
 class Evaluator(object):

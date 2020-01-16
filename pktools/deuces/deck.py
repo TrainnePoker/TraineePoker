@@ -1,5 +1,5 @@
 from random import shuffle
-from deuces.card import Card
+from pktools.deuces.card import Card
 
 class Deck:
     """

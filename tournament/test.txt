@@ -1,0 +1,1077 @@
+tournament ID: none
+ game date: 2020-01-13 15:52:12.160606
+ number of players: 6
+ models: player 0 -> random_agent_20200109 , player 1 -> random_agent_20200110 , player 2 -> random_agent_20200109 , player 3 -> random_agent_20200110 , player 4 -> random_agent_20200109 , player 5 -> random_agent_20200110 , 
+initial stack 1000
+blind value 10
+timeout 5
+ ###################
+ STARTING GAME LOGGING 
+###################
+
+round nb: 0
+
+player 0 hand: 7D 12C stack: 990
+player 1 hand: 9D 0C stack: 990
+player 2 hand: 4D 1C stack: 990
+player 3 hand: 12D 7C stack: 990
+player 4 hand: 4S 2D stack: 990
+player 5 hand: 0H 1H stack: 990
+betting round 0
+ player 1: action call, stack: 990, status: 10 
+ player 2: action fold, stack: 990, status: 10 
+ player 3: action call, stack: 990, status: 10 
+ player 4: action call, stack: 990, status: 10 
+ player 5: action fold, stack: 990, status: 10 
+ player 0: action 10, stack: 980, status: 20 
+ player 1: action call, stack: 980, status: 20 
+ player 3: action call, stack: 980, status: 20 
+ player 4: action call, stack: 980, status: 20 
+
+betting round 1
+ player 1: action call, stack: 980, status: 20 
+ player 3: action 10, stack: 970, status: 30 
+ player 4: action fold, stack: 980, status: 20 
+ player 0: action call, stack: 970, status: 30 
+ player 1: action fold, stack: 980, status: 20 
+
+betting round 2
+ player 3: action call, stack: 970, status: 30 
+ player 0: action fold, stack: 970, status: 30 
+
+betting round 3
+
+
+player 0 hand: 7D 12C stack: 970
+player 1 hand: 9D 0C stack: 980
+player 2 hand: 4D 1C stack: 990
+player 3 hand: 12D 7C stack: 1090
+player 4 hand: 4S 2D stack: 980
+player 5 hand: 0H 1H stack: 990
+round nb: 1
+
+player 0 hand: 7S 10H stack: 960
+player 1 hand: 5H 9C stack: 970
+player 2 hand: 0D 1D stack: 980
+player 3 hand: 3C 0C stack: 1080
+player 4 hand: 9S 1H stack: 970
+player 5 hand: 8D 2C stack: 980
+betting round 0
+ player 2: action call, stack: 980, status: 10 
+ player 3: action call, stack: 1080, status: 10 
+ player 4: action call, stack: 970, status: 10 
+ player 5: action 10, stack: 970, status: 20 
+ player 0: action call, stack: 950, status: 20 
+ player 1: action call, stack: 960, status: 20 
+ player 2: action call, stack: 970, status: 20 
+ player 3: action call, stack: 1070, status: 20 
+ player 4: action call, stack: 960, status: 20 
+
+betting round 1
+ player 2: action call, stack: 970, status: 20 
+ player 3: action call, stack: 1070, status: 20 
+ player 4: action fold, stack: 960, status: 20 
+ player 5: action call, stack: 970, status: 20 
+ player 0: action call, stack: 950, status: 20 
+ player 1: action call, stack: 960, status: 20 
+
+betting round 2
+ player 2: action call, stack: 970, status: 20 
+ player 3: action call, stack: 1070, status: 20 
+ player 5: action 10, stack: 960, status: 30 
+ player 0: action fold, stack: 950, status: 20 
+ player 1: action call, stack: 950, status: 30 
+ player 2: action call, stack: 960, status: 30 
+ player 3: action call, stack: 1060, status: 30 
+
+betting round 3
+ player 2: action fold, stack: 960, status: 30 
+ player 3: action call, stack: 1060, status: 30 
+ player 5: action call, stack: 960, status: 30 
+ player 1: action 10, stack: 940, status: 40 
+ player 3: action call, stack: 1050, status: 40 
+ player 5: action call, stack: 950, status: 40 
+
+
+player 0 hand: 7S 10H stack: 950
+player 1 hand: 5H 9C stack: 940
+player 2 hand: 0D 1D stack: 960
+player 3 hand: 3C 0C stack: 1050
+player 4 hand: 9S 1H stack: 960
+player 5 hand: 8D 2C stack: 1140
+round nb: 2
+
+player 0 hand: 0S 0C stack: 940
+player 1 hand: 11H 5C stack: 930
+player 2 hand: 9C 2D stack: 950
+player 3 hand: 7H 12H stack: 1040
+player 4 hand: 8D 5S stack: 950
+player 5 hand: 8S 8H stack: 1130
+betting round 0
+ player 3: action call, stack: 1040, status: 10 
+ player 4: action call, stack: 950, status: 10 
+ player 5: action call, stack: 1130, status: 10 
+ player 0: action 10, stack: 930, status: 20 
+ player 1: action call, stack: 920, status: 20 
+ player 2: action 20, stack: 930, status: 30 
+ player 3: action call, stack: 1020, status: 30 
+ player 4: action fold, stack: 950, status: 10 
+ player 5: action call, stack: 1110, status: 30 
+ player 0: action fold, stack: 930, status: 20 
+ player 1: action 20, stack: 900, status: 40 
+ player 2: action fold, stack: 930, status: 30 
+ player 3: action 20, stack: 1000, status: 50 
+ player 5: action fold, stack: 1110, status: 30 
+ player 1: action call, stack: 890, status: 50 
+
+betting round 1
+ player 3: action call, stack: 1000, status: 50 
+ player 1: action 10, stack: 880, status: 60 
+ player 3: action 20, stack: 980, status: 70 
+ player 1: action call, stack: 870, status: 70 
+
+betting round 2
+ player 3: action call, stack: 980, status: 70 
+ player 1: action 10, stack: 860, status: 80 
+ player 3: action 20, stack: 960, status: 90 
+ player 1: action fold, stack: 860, status: 80 
+
+betting round 3
+
+
+player 0 hand: 0S 0C stack: 930
+player 1 hand: 11H 5C stack: 860
+player 2 hand: 9C 2D stack: 930
+player 3 hand: 7H 12H stack: 1220
+player 4 hand: 8D 5S stack: 950
+player 5 hand: 8S 8H stack: 1110
+round nb: 3
+
+player 0 hand: 6D 0D stack: 920
+player 1 hand: 5H 5S stack: 850
+player 2 hand: 1D 7S stack: 920
+player 3 hand: 8S 1H stack: 1210
+player 4 hand: 4H 10C stack: 940
+player 5 hand: 12D 8C stack: 1100
+betting round 0
+ player 4: action 10, stack: 930, status: 20 
+ player 5: action call, stack: 1090, status: 20 
+ player 0: action call, stack: 910, status: 20 
+ player 1: action call, stack: 840, status: 20 
+ player 2: action call, stack: 910, status: 20 
+ player 3: action call, stack: 1200, status: 20 
+
+betting round 1
+ player 4: action call, stack: 930, status: 20 
+ player 5: action call, stack: 1090, status: 20 
+ player 0: action 10, stack: 900, status: 30 
+ player 1: action call, stack: 830, status: 30 
+ player 2: action call, stack: 900, status: 30 
+ player 3: action call, stack: 1190, status: 30 
+ player 4: action call, stack: 920, status: 30 
+ player 5: action call, stack: 1080, status: 30 
+
+betting round 2
+ player 4: action 10, stack: 910, status: 40 
+ player 5: action call, stack: 1070, status: 40 
+ player 0: action call, stack: 890, status: 40 
+ player 1: action call, stack: 820, status: 40 
+ player 2: action call, stack: 890, status: 40 
+ player 3: action call, stack: 1180, status: 40 
+
+betting round 3
+ player 4: action call, stack: 910, status: 40 
+ player 5: action call, stack: 1070, status: 40 
+ player 0: action call, stack: 890, status: 40 
+ player 1: action call, stack: 820, status: 40 
+ player 2: action call, stack: 890, status: 40 
+ player 3: action call, stack: 1180, status: 40 
+
+
+player 0 hand: 6D 0D stack: 890
+player 1 hand: 5H 5S stack: 820
+player 2 hand: 1D 7S stack: 890
+player 3 hand: 8S 1H stack: 1180
+player 4 hand: 4H 10C stack: 1150
+player 5 hand: 12D 8C stack: 1070
+round nb: 4
+
+player 0 hand: 10D 10C stack: 880
+player 1 hand: 0H 9S stack: 810
+player 2 hand: 4D 7S stack: 880
+player 3 hand: 2S 7C stack: 1170
+player 4 hand: 12D 6S stack: 1140
+player 5 hand: 9D 3C stack: 1060
+betting round 0
+ player 5: action call, stack: 1060, status: 10 
+ player 0: action call, stack: 880, status: 10 
+ player 1: action call, stack: 810, status: 10 
+ player 2: action call, stack: 880, status: 10 
+ player 3: action fold, stack: 1170, status: 10 
+ player 4: action call, stack: 1140, status: 10 
+
+betting round 1
+ player 5: action fold, stack: 1060, status: 10 
+ player 0: action fold, stack: 880, status: 10 
+ player 1: action fold, stack: 810, status: 10 
+ player 2: action fold, stack: 880, status: 10 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 10D 10C stack: 880
+player 1 hand: 0H 9S stack: 810
+player 2 hand: 4D 7S stack: 880
+player 3 hand: 2S 7C stack: 1170
+player 4 hand: 12D 6S stack: 1200
+player 5 hand: 9D 3C stack: 1060
+round nb: 5
+
+player 0 hand: 0S 9C stack: 870
+player 1 hand: 4D 2C stack: 800
+player 2 hand: 11S 7H stack: 870
+player 3 hand: 8C 1C stack: 1160
+player 4 hand: 10D 10H stack: 1190
+player 5 hand: 12H 3D stack: 1050
+betting round 0
+ player 0: action call, stack: 870, status: 10 
+ player 1: action call, stack: 800, status: 10 
+ player 2: action fold, stack: 870, status: 10 
+ player 3: action call, stack: 1160, status: 10 
+ player 4: action call, stack: 1190, status: 10 
+ player 5: action 10, stack: 1040, status: 20 
+ player 0: action call, stack: 860, status: 20 
+ player 1: action 20, stack: 780, status: 30 
+ player 3: action 30, stack: 1130, status: 40 
+ player 4: action 40, stack: 1150, status: 50 
+ player 5: action call, stack: 1010, status: 50 
+ player 0: action fold, stack: 860, status: 20 
+ player 1: action 30, stack: 750, status: 60 
+ player 3: action fold, stack: 1130, status: 40 
+ player 4: action fold, stack: 1150, status: 50 
+ player 5: action fold, stack: 1010, status: 50 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 0S 9C stack: 860
+player 1 hand: 4D 2C stack: 980
+player 2 hand: 11S 7H stack: 870
+player 3 hand: 8C 1C stack: 1130
+player 4 hand: 10D 10H stack: 1150
+player 5 hand: 12H 3D stack: 1010
+round nb: 6
+
+player 0 hand: 10S 12H stack: 850
+player 1 hand: 1D 9S stack: 970
+player 2 hand: 9D 2D stack: 860
+player 3 hand: 5S 8D stack: 1120
+player 4 hand: 4S 6C stack: 1140
+player 5 hand: 7C 8H stack: 1000
+betting round 0
+ player 1: action call, stack: 970, status: 10 
+ player 2: action call, stack: 860, status: 10 
+ player 3: action call, stack: 1120, status: 10 
+ player 4: action fold, stack: 1140, status: 10 
+ player 5: action 10, stack: 990, status: 20 
+ player 0: action call, stack: 840, status: 20 
+ player 1: action call, stack: 960, status: 20 
+ player 2: action call, stack: 850, status: 20 
+ player 3: action call, stack: 1110, status: 20 
+
+betting round 1
+ player 1: action call, stack: 960, status: 20 
+ player 2: action 10, stack: 840, status: 30 
+ player 3: action fold, stack: 1110, status: 20 
+ player 5: action call, stack: 980, status: 30 
+ player 0: action call, stack: 830, status: 30 
+ player 1: action call, stack: 950, status: 30 
+
+betting round 2
+ player 1: action call, stack: 950, status: 30 
+ player 2: action call, stack: 840, status: 30 
+ player 5: action call, stack: 980, status: 30 
+ player 0: action 10, stack: 820, status: 40 
+ player 1: action 20, stack: 930, status: 50 
+ player 2: action call, stack: 820, status: 50 
+ player 5: action 30, stack: 950, status: 60 
+ player 0: action call, stack: 800, status: 60 
+ player 1: action 20, stack: 910, status: 70 
+ player 2: action fold, stack: 820, status: 50 
+ player 5: action call, stack: 940, status: 70 
+ player 0: action fold, stack: 800, status: 60 
+
+betting round 3
+ player 1: action 10, stack: 900, status: 80 
+ player 5: action call, stack: 930, status: 80 
+
+
+player 0 hand: 10S 12H stack: 800
+player 1 hand: 1D 9S stack: 900
+player 2 hand: 9D 2D stack: 820
+player 3 hand: 5S 8D stack: 1110
+player 4 hand: 4S 6C stack: 1140
+player 5 hand: 7C 8H stack: 1230
+round nb: 7
+
+player 0 hand: 9H 12C stack: 790
+player 1 hand: 7H 0H stack: 890
+player 2 hand: 4S 5H stack: 810
+player 3 hand: 8S 7S stack: 1100
+player 4 hand: 11D 11C stack: 1130
+player 5 hand: 9S 7D stack: 1220
+betting round 0
+ player 2: action fold, stack: 810, status: 10 
+ player 3: action 10, stack: 1090, status: 20 
+ player 4: action call, stack: 1120, status: 20 
+ player 5: action call, stack: 1210, status: 20 
+ player 0: action call, stack: 780, status: 20 
+ player 1: action call, stack: 880, status: 20 
+
+betting round 1
+ player 3: action call, stack: 1090, status: 20 
+ player 4: action call, stack: 1120, status: 20 
+ player 5: action call, stack: 1210, status: 20 
+ player 0: action fold, stack: 780, status: 20 
+ player 1: action call, stack: 880, status: 20 
+
+betting round 2
+ player 3: action fold, stack: 1090, status: 20 
+ player 4: action call, stack: 1120, status: 20 
+ player 5: action call, stack: 1210, status: 20 
+ player 1: action call, stack: 880, status: 20 
+
+betting round 3
+ player 4: action call, stack: 1120, status: 20 
+ player 5: action call, stack: 1210, status: 20 
+ player 1: action call, stack: 880, status: 20 
+
+
+player 0 hand: 9H 12C stack: 780
+player 1 hand: 7H 0H stack: 880
+player 2 hand: 4S 5H stack: 810
+player 3 hand: 8S 7S stack: 1090
+player 4 hand: 11D 11C stack: 1230
+player 5 hand: 9S 7D stack: 1210
+round nb: 8
+
+player 0 hand: 11C 0C stack: 770
+player 1 hand: 5C 9D stack: 870
+player 2 hand: 6C 2D stack: 800
+player 3 hand: 4C 1H stack: 1080
+player 4 hand: 7H 8S stack: 1220
+player 5 hand: 1C 7D stack: 1200
+betting round 0
+ player 3: action 10, stack: 1070, status: 20 
+ player 4: action fold, stack: 1220, status: 10 
+ player 5: action call, stack: 1190, status: 20 
+ player 0: action fold, stack: 770, status: 10 
+ player 1: action call, stack: 860, status: 20 
+ player 2: action call, stack: 790, status: 20 
+
+betting round 1
+ player 3: action call, stack: 1070, status: 20 
+ player 5: action call, stack: 1190, status: 20 
+ player 1: action fold, stack: 860, status: 20 
+ player 2: action call, stack: 790, status: 20 
+
+betting round 2
+ player 3: action 10, stack: 1060, status: 30 
+ player 5: action call, stack: 1180, status: 30 
+ player 2: action call, stack: 780, status: 30 
+
+betting round 3
+ player 3: action call, stack: 1060, status: 30 
+ player 5: action 10, stack: 1170, status: 40 
+ player 2: action call, stack: 770, status: 40 
+ player 3: action call, stack: 1050, status: 40 
+
+
+player 0 hand: 11C 0C stack: 770
+player 1 hand: 5C 9D stack: 860
+player 2 hand: 6C 2D stack: 930
+player 3 hand: 4C 1H stack: 1050
+player 4 hand: 7H 8S stack: 1220
+player 5 hand: 1C 7D stack: 1170
+round nb: 9
+
+player 0 hand: 11D 0D stack: 760
+player 1 hand: 0H 5S stack: 850
+player 2 hand: 8C 1D stack: 920
+player 3 hand: 2D 5C stack: 1040
+player 4 hand: 1C 9S stack: 1210
+player 5 hand: 12D 2S stack: 1160
+betting round 0
+ player 4: action call, stack: 1210, status: 10 
+ player 5: action call, stack: 1160, status: 10 
+ player 0: action call, stack: 760, status: 10 
+ player 1: action call, stack: 850, status: 10 
+ player 2: action call, stack: 920, status: 10 
+ player 3: action call, stack: 1040, status: 10 
+
+betting round 1
+ player 4: action call, stack: 1210, status: 10 
+ player 5: action fold, stack: 1160, status: 10 
+ player 0: action fold, stack: 760, status: 10 
+ player 1: action call, stack: 850, status: 10 
+ player 2: action call, stack: 920, status: 10 
+ player 3: action call, stack: 1040, status: 10 
+
+betting round 2
+ player 4: action call, stack: 1210, status: 10 
+ player 1: action 10, stack: 840, status: 20 
+ player 2: action call, stack: 910, status: 20 
+ player 3: action call, stack: 1030, status: 20 
+ player 4: action call, stack: 1200, status: 20 
+
+betting round 3
+ player 4: action fold, stack: 1200, status: 20 
+ player 1: action fold, stack: 840, status: 20 
+ player 2: action fold, stack: 910, status: 20 
+
+
+player 0 hand: 11D 0D stack: 760
+player 1 hand: 0H 5S stack: 840
+player 2 hand: 8C 1D stack: 910
+player 3 hand: 2D 5C stack: 1130
+player 4 hand: 1C 9S stack: 1200
+player 5 hand: 12D 2S stack: 1160tournament ID: none
+ game date: 2020-01-13 17:00:13.735247
+ number of players: 2
+ models: player 0 -> random_agent_20200109 , player 1 -> random_agent_20200110 , 
+initial stack 1000
+blind value 10
+timeout 5
+ ###################
+ STARTING GAME LOGGING 
+###################
+
+round nb: 0
+
+player 0 hand: 0H 5S stack: 990
+player 1 hand: 1H 2D stack: 990
+betting round 0
+ player 1: action call, stack: 990, status: 10 
+ player 0: action call, stack: 990, status: 10 
+
+betting round 1
+ player 1: action 10, stack: 980, status: 20 
+ player 0: action call, stack: 980, status: 20 
+
+betting round 2
+ player 1: action call, stack: 980, status: 20 
+ player 0: action 10, stack: 970, status: 30 
+ player 1: action 20, stack: 960, status: 40 
+ player 0: action call, stack: 960, status: 40 
+
+betting round 3
+ player 1: action call, stack: 960, status: 40 
+ player 0: action call, stack: 960, status: 40 
+
+
+player 0 hand: 0H 5S stack: 960
+player 1 hand: 1H 2D stack: 1040
+round nb: 1
+
+player 0 hand: 11H 3S stack: 950
+player 1 hand: 7S 10C stack: 1030
+betting round 0
+ player 0: action call, stack: 950, status: 10 
+ player 1: action call, stack: 1030, status: 10 
+
+betting round 1
+ player 0: action call, stack: 950, status: 10 
+ player 1: action call, stack: 1030, status: 10 
+
+betting round 2
+ player 0: action call, stack: 950, status: 10 
+ player 1: action call, stack: 1030, status: 10 
+
+betting round 3
+ player 0: action call, stack: 950, status: 10 
+ player 1: action call, stack: 1030, status: 10 
+
+
+player 0 hand: 11H 3S stack: 950
+player 1 hand: 7S 10C stack: 1050
+round nb: 2
+
+player 0 hand: 1C 11C stack: 940
+player 1 hand: 2D 9S stack: 1040
+betting round 0
+ player 1: action call, stack: 1040, status: 10 
+ player 0: action call, stack: 940, status: 10 
+
+betting round 1
+ player 1: action 10, stack: 1030, status: 20 
+ player 0: action call, stack: 930, status: 20 
+
+betting round 2
+ player 1: action 10, stack: 1020, status: 30 
+ player 0: action fold, stack: 930, status: 20 
+
+betting round 3
+
+
+player 0 hand: 1C 11C stack: 930
+player 1 hand: 2D 9S stack: 1070
+round nb: 3
+
+player 0 hand: 5H 12S stack: 920
+player 1 hand: 4S 3H stack: 1060
+betting round 0
+ player 0: action call, stack: 920, status: 10 
+ player 1: action call, stack: 1060, status: 10 
+
+betting round 1
+ player 0: action call, stack: 920, status: 10 
+ player 1: action call, stack: 1060, status: 10 
+
+betting round 2
+ player 0: action call, stack: 920, status: 10 
+ player 1: action call, stack: 1060, status: 10 
+
+betting round 3
+ player 0: action call, stack: 920, status: 10 
+ player 1: action call, stack: 1060, status: 10 
+
+
+player 0 hand: 5H 12S stack: 940
+player 1 hand: 4S 3H stack: 1060
+round nb: 4
+
+player 0 hand: 4D 6D stack: 930
+player 1 hand: 1H 9S stack: 1050
+betting round 0
+ player 1: action call, stack: 1050, status: 10 
+ player 0: action call, stack: 930, status: 10 
+
+betting round 1
+ player 1: action call, stack: 1050, status: 10 
+ player 0: action 10, stack: 920, status: 20 
+ player 1: action fold, stack: 1050, status: 10 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 4D 6D stack: 950
+player 1 hand: 1H 9S stack: 1050
+round nb: 5
+
+player 0 hand: 0S 7S stack: 940
+player 1 hand: 9D 6C stack: 1040
+betting round 0
+ player 0: action call, stack: 940, status: 10 
+ player 1: action call, stack: 1040, status: 10 
+
+betting round 1
+ player 0: action fold, stack: 940, status: 10 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 0S 7S stack: 940
+player 1 hand: 9D 6C stack: 1060
+round nb: 6
+
+player 0 hand: 7D 11S stack: 930
+player 1 hand: 8C 1D stack: 1050
+betting round 0
+ player 1: action 10, stack: 1040, status: 20 
+ player 0: action fold, stack: 930, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 7D 11S stack: 930
+player 1 hand: 8C 1D stack: 1070
+round nb: 7
+
+player 0 hand: 11C 3H stack: 920
+player 1 hand: 11D 2D stack: 1060
+betting round 0
+ player 0: action fold, stack: 920, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 11C 3H stack: 920
+player 1 hand: 11D 2D stack: 1080
+round nb: 8
+
+player 0 hand: 2C 10H stack: 910
+player 1 hand: 7S 7D stack: 1070
+betting round 0
+ player 1: action 10, stack: 1060, status: 20 
+ player 0: action call, stack: 900, status: 20 
+
+betting round 1
+ player 1: action 10, stack: 1050, status: 30 
+ player 0: action call, stack: 890, status: 30 
+
+betting round 2
+ player 1: action 10, stack: 1040, status: 40 
+ player 0: action 20, stack: 870, status: 50 
+ player 1: action 20, stack: 1020, status: 60 
+ player 0: action fold, stack: 870, status: 50 
+
+betting round 3
+
+
+player 0 hand: 2C 10H stack: 870
+player 1 hand: 7S 7D stack: 1130
+round nb: 9
+
+player 0 hand: 11S 4S stack: 860
+player 1 hand: 12S 11C stack: 1120
+betting round 0
+ player 0: action fold, stack: 860, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 11S 4S stack: 860
+player 1 hand: 12S 11C stack: 1140tournament ID: none
+ game date: 2020-01-13 17:01:04.371229
+ number of players: 2
+ models: player 0 -> random_agent_20200109 , player 1 -> random_agent_20200110 , 
+initial stack 1000
+blind value 10
+timeout 5
+ ###################
+ STARTING GAME LOGGING 
+###################
+
+round nb: 0
+
+player 0 hand: 3D 0C stack: 990
+player 1 hand: 11D 5H stack: 990
+betting round 0
+ player 1: action call, stack: 990, status: 10 
+ player 0: action call, stack: 990, status: 10 
+
+betting round 1
+ player 1: action 10, stack: 980, status: 20 
+ player 0: action call, stack: 980, status: 20 
+
+betting round 2
+ player 1: action 10, stack: 970, status: 30 
+ player 0: action call, stack: 970, status: 30 
+
+betting round 3
+ player 1: action call, stack: 970, status: 30 
+ player 0: action call, stack: 970, status: 30 
+
+
+player 0 hand: 3D 0C stack: 1030
+player 1 hand: 11D 5H stack: 970
+round nb: 1
+
+player 0 hand: 8C 10C stack: 1020
+player 1 hand: 8H 4S stack: 960
+betting round 0
+ player 0: action 10, stack: 1010, status: 20 
+ player 1: action 20, stack: 940, status: 30 
+ player 0: action call, stack: 1000, status: 30 
+
+betting round 1
+ player 0: action call, stack: 1000, status: 30 
+ player 1: action call, stack: 940, status: 30 
+
+betting round 2
+ player 0: action call, stack: 1000, status: 30 
+ player 1: action call, stack: 940, status: 30 
+
+betting round 3
+ player 0: action call, stack: 1000, status: 30 
+ player 1: action call, stack: 940, status: 30 
+
+
+player 0 hand: 8C 10C stack: 1060
+player 1 hand: 8H 4S stack: 940
+round nb: 2
+
+player 0 hand: 6C 11C stack: 1050
+player 1 hand: 3D 3C stack: 930
+betting round 0
+ player 1: action call, stack: 930, status: 10 
+ player 0: action 10, stack: 1040, status: 20 
+ player 1: action call, stack: 920, status: 20 
+
+betting round 1
+ player 1: action call, stack: 920, status: 20 
+ player 0: action 10, stack: 1030, status: 30 
+ player 1: action 20, stack: 900, status: 40 
+ player 0: action call, stack: 1020, status: 40 
+
+betting round 2
+ player 1: action call, stack: 900, status: 40 
+ player 0: action 10, stack: 1010, status: 50 
+ player 1: action 20, stack: 880, status: 60 
+ player 0: action call, stack: 1000, status: 60 
+
+betting round 3
+ player 1: action 10, stack: 870, status: 70 
+ player 0: action call, stack: 990, status: 70 
+
+
+player 0 hand: 6C 11C stack: 1130
+player 1 hand: 3D 3C stack: 870
+round nb: 3
+
+player 0 hand: 0D 4H stack: 1120
+player 1 hand: 7D 0C stack: 860
+betting round 0
+ player 0: action fold, stack: 1120, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 0D 4H stack: 1120
+player 1 hand: 7D 0C stack: 880
+round nb: 4
+
+player 0 hand: 0S 12H stack: 1110
+player 1 hand: 0H 6H stack: 870
+betting round 0
+ player 1: action fold, stack: 870, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 0S 12H stack: 1130
+player 1 hand: 0H 6H stack: 870
+round nb: 5
+
+player 0 hand: 1C 7H stack: 1120
+player 1 hand: 9S 7S stack: 860
+betting round 0
+ player 0: action fold, stack: 1120, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 1C 7H stack: 1120
+player 1 hand: 9S 7S stack: 880
+round nb: 6
+
+player 0 hand: 8C 11D stack: 1110
+player 1 hand: 7H 11C stack: 870
+betting round 0
+ player 1: action fold, stack: 870, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 8C 11D stack: 1130
+player 1 hand: 7H 11C stack: 870
+round nb: 7
+
+player 0 hand: 12D 10S stack: 1120
+player 1 hand: 5D 0D stack: 860
+betting round 0
+ player 0: action call, stack: 1120, status: 10 
+ player 1: action call, stack: 860, status: 10 
+
+betting round 1
+ player 0: action call, stack: 1120, status: 10 
+ player 1: action call, stack: 860, status: 10 
+
+betting round 2
+ player 0: action call, stack: 1120, status: 10 
+ player 1: action 10, stack: 850, status: 20 
+ player 0: action fold, stack: 1120, status: 10 
+
+betting round 3
+
+
+player 0 hand: 12D 10S stack: 1120
+player 1 hand: 5D 0D stack: 880
+round nb: 8
+
+player 0 hand: 8H 12S stack: 1110
+player 1 hand: 4H 12H stack: 870
+betting round 0
+ player 1: action 10, stack: 860, status: 20 
+ player 0: action call, stack: 1100, status: 20 
+
+betting round 1
+ player 1: action call, stack: 860, status: 20 
+ player 0: action fold, stack: 1100, status: 20 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 8H 12S stack: 1100
+player 1 hand: 4H 12H stack: 900
+round nb: 9
+
+player 0 hand: 10C 2S stack: 1090
+player 1 hand: 4H 6H stack: 890
+betting round 0
+ player 0: action fold, stack: 1090, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 10C 2S stack: 1090
+player 1 hand: 4H 6H stack: 910tournament ID: none
+ game date: 2020-01-13 17:03:43.987171
+ number of players: 2
+ models: player 0 -> random_agent_20200109 , player 1 -> random_agent_20200110 , 
+initial stack 1000
+blind value 10
+timeout 5
+ ###################
+ STARTING GAME LOGGING 
+###################
+
+round nb: 0
+
+player 0 hand: 12C 6D stack: 990
+player 1 hand: 7S 7H stack: 990
+betting round 0
+ player 1: action 10, stack: 980, status: 20 
+ player 0: action call, stack: 980, status: 20 
+
+betting round 1
+ player 1: action call, stack: 980, status: 20 
+ player 0: action call, stack: 980, status: 20 
+
+betting round 2
+ player 1: action fold, stack: 980, status: 20 
+
+betting round 3
+
+
+player 0 hand: 12C 6D stack: 1020
+player 1 hand: 7S 7H stack: 980
+round nb: 1
+
+player 0 hand: 2S 1D stack: 1010
+player 1 hand: 0S 3C stack: 970
+betting round 0
+ player 0: action 10, stack: 1000, status: 20 
+ player 1: action call, stack: 960, status: 20 
+
+betting round 1
+ player 0: action 10, stack: 990, status: 30 
+ player 1: action call, stack: 950, status: 30 
+
+betting round 2
+ player 0: action call, stack: 990, status: 30 
+ player 1: action fold, stack: 950, status: 30 
+
+betting round 3
+
+
+player 0 hand: 2S 1D stack: 1050
+player 1 hand: 0S 3C stack: 950
+round nb: 2
+
+player 0 hand: 12H 10S stack: 1040
+player 1 hand: 7H 11C stack: 940
+betting round 0
+ player 1: action call, stack: 940, status: 10 
+ player 0: action call, stack: 1040, status: 10 
+
+betting round 1
+ player 1: action call, stack: 940, status: 10 
+ player 0: action fold, stack: 1040, status: 10 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 12H 10S stack: 1040
+player 1 hand: 7H 11C stack: 960
+round nb: 3
+
+player 0 hand: 9S 10C stack: 1030
+player 1 hand: 4S 12C stack: 950
+betting round 0
+ player 0: action call, stack: 1030, status: 10 
+ player 1: action 10, stack: 940, status: 20 
+ player 0: action call, stack: 1020, status: 20 
+
+betting round 1
+ player 0: action call, stack: 1020, status: 20 
+ player 1: action call, stack: 940, status: 20 
+
+betting round 2
+ player 0: action call, stack: 1020, status: 20 
+ player 1: action call, stack: 940, status: 20 
+
+betting round 3
+ player 0: action 10, stack: 1010, status: 30 
+ player 1: action call, stack: 930, status: 30 
+
+
+player 0 hand: 9S 10C stack: 1070
+player 1 hand: 4S 12C stack: 930
+round nb: 4
+
+player 0 hand: 7C 11H stack: 1060
+player 1 hand: 6C 5C stack: 920
+betting round 0
+ player 1: action call, stack: 920, status: 10 
+ player 0: action call, stack: 1060, status: 10 
+
+betting round 1
+ player 1: action call, stack: 920, status: 10 
+ player 0: action call, stack: 1060, status: 10 
+
+betting round 2
+ player 1: action call, stack: 920, status: 10 
+ player 0: action call, stack: 1060, status: 10 
+
+betting round 3
+ player 1: action 10, stack: 910, status: 20 
+ player 0: action fold, stack: 1060, status: 10 
+
+
+player 0 hand: 7C 11H stack: 1060
+player 1 hand: 6C 5C stack: 940
+round nb: 5
+
+player 0 hand: 1D 9D stack: 1050
+player 1 hand: 4C 3H stack: 930
+betting round 0
+ player 0: action 10, stack: 1040, status: 20 
+ player 1: action 20, stack: 910, status: 30 
+ player 0: action fold, stack: 1040, status: 20 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 1D 9D stack: 1040
+player 1 hand: 4C 3H stack: 960
+round nb: 6
+
+player 0 hand: 7S 2C stack: 1030
+player 1 hand: 6H 2H stack: 950
+betting round 0
+ player 1: action call, stack: 950, status: 10 
+ player 0: action call, stack: 1030, status: 10 
+
+betting round 1
+ player 1: action fold, stack: 950, status: 10 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 7S 2C stack: 1050
+player 1 hand: 6H 2H stack: 950
+round nb: 7
+
+player 0 hand: 8D 4C stack: 1040
+player 1 hand: 11S 11C stack: 940
+betting round 0
+ player 0: action call, stack: 1040, status: 10 
+ player 1: action call, stack: 940, status: 10 
+
+betting round 1
+ player 0: action call, stack: 1040, status: 10 
+ player 1: action call, stack: 940, status: 10 
+
+betting round 2
+ player 0: action call, stack: 1040, status: 10 
+ player 1: action call, stack: 940, status: 10 
+
+betting round 3
+ player 0: action call, stack: 1040, status: 10 
+ player 1: action 10, stack: 930, status: 20 
+ player 0: action call, stack: 1030, status: 20 
+
+
+player 0 hand: 8D 4C stack: 1030
+player 1 hand: 11S 11C stack: 970
+round nb: 8
+
+player 0 hand: 6H 4H stack: 1020
+player 1 hand: 1D 8D stack: 960
+betting round 0
+ player 1: action 10, stack: 950, status: 20 
+ player 0: action fold, stack: 1020, status: 10 
+
+betting round 1
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 6H 4H stack: 1020
+player 1 hand: 1D 8D stack: 980
+round nb: 9
+
+player 0 hand: 4D 0C stack: 1010
+player 1 hand: 5H 6S stack: 970
+betting round 0
+ player 0: action call, stack: 1010, status: 10 
+ player 1: action 10, stack: 960, status: 20 
+ player 0: action call, stack: 1000, status: 20 
+
+betting round 1
+ player 0: action 10, stack: 990, status: 30 
+ player 1: action 20, stack: 940, status: 40 
+ player 0: action fold, stack: 990, status: 30 
+
+betting round 2
+
+betting round 3
+
+
+player 0 hand: 4D 0C stack: 990
+player 1 hand: 5H 6S stack: 1010

@@ -7,6 +7,6 @@ def make_decision(input):
     if rand_nb < 0.7:
         return 'call'
     elif rand_nb > 0.8:
-        return input['current raise'] - input['player info'][3] + input['minimum raise']
+        return input['current raise'] - input['player info']['bet'] + input['minimum raise']
     else:
         return 'fold'

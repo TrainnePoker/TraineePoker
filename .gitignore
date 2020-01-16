@@ -1,0 +1,20 @@
+
+*.yaml
+# Python files
+*.pyc
+
+#
+*__pycache__*
+# Temporary data
+tmp
+*.zip
+development_env/databrickscfg
+
+# ML Flow
+**/mlruns
+
+# pycharm
+**/.idea
+
+# virtual env
+/venv

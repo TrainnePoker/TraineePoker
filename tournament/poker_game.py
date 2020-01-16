@@ -5,6 +5,7 @@ from pktools.deuces.deck import Deck
 import numpy as np
 import pandas as pd
 from tournament.timeout import timeout
+import yaml
 
 
 """
@@ -30,9 +31,12 @@ class Player:
         self.round_status = 'in'
         self.last_action = ''
 
-    def get_player_data(self):
+    def get_player_data(self, hide_hand = True):
         """returns a quick snapshot of player status, for logging and model's input"""
-        return self.ID, self.last_action, self.stack, self.bet, self.round_status
+        info = {"ID":self.ID, "last_action":self.last_action, "stack":self.stack, "bet":int(self.bet), "status":self.round_status}
+        if not hide_hand:
+            info["hand"] = self.hand
+        return info
 
     def __bet(self, amount):
         """
@@ -174,6 +178,8 @@ class Game:
             self.__next_round()
             self.round_nb += 1
 
+        self.__save_game_log()
+
         return
 
     def __get_game_metadata(self):
@@ -183,13 +189,12 @@ class Game:
                 'timeout': self.timeout,
                 'initial stack': self.initial_stack}
 
-    def __get_round_data(self):
+    def __get_round_info(self):
         players_in = [i for i,player in enumerate(self.players) if player.game_status == 'in']
-        return {'round_nb': self.round_nb,
-                'players in': players_in,
+        return {'round_number': self.round_nb,
+                'players_in': players_in,
                 'community': self.community_cards,
-                'hands': [self.players[p].hand for p in players_in],
-                'stacks': [self.players[p].stack for p in players_in]}
+                'players_info': [self.players[p].get_player_data(hide_hand=False) for p in players_in]}
 
     def __update_community(self):
         # card increment based on which round we are in
@@ -254,6 +259,7 @@ class Game:
             for winner in winners:
                 self.players[winner].stack += int(pot.content / len(winners))
 
+
     def __next_round(self):
 
         # reinitializing/updating round data
@@ -277,11 +283,6 @@ class Game:
             if player.game_status == 'in':
                 player.new_round(hand=self.deck.draw(2), blind=self.blind)
 
-        # logging
-        self.game_logger += [{'initial status':None ,'round logs':None,'final status':None}]
-        self.game_logger[-1]['initial status'] = self.__get_round_data()
-
-
         # running the 4 betting turns
         for _ in range(4):
             self.__next_turn()
@@ -299,10 +300,12 @@ class Game:
                 player.round_status = 'out'
 
         # logging
-        self.game_logger[-1]['round logs'] = self.round_logger
-        self.game_logger[-1]['final status'] = self.__get_round_data()
-
-
+        self.game_logger += [self.__get_round_info()]
+        self.game_logger[-1]['round_history'] = self.round_logger
+        print(ranking)
+        print(type(ranking))
+        print(np.argwhere(ranking==0))
+        self.game_logger[-1]["winner"] = np.where(ranking == 0)[0].tolist()
         self.display()
 
     def __next_turn(self):
@@ -358,33 +361,20 @@ class Game:
 
     def __save_game_log(self):
 
-        def get_player_status(status_dict):
-            status_string = ""
-            pass
-
-        file = open(self.log_file, "a+")
-
-        # writing game meta data
-        file.write("tournament ID: "+str(self.tournament_id))
-        file.write("game date: "+datetime.now())
-        file.write("number of players: "+str(self.n_players))
-        model_list = ''
+        models_dict = {}
         for player in self.players:
-            model_name = player.model.__module__.replace('.',' ').split()[-1]
-            model_list += "player %d -> %s , "% (player.ID, model_name)
-        file.write("models: " + model_list)
+            model_name = player.model.__module__.replace('.', ' ').split()[-1]
+            models_dict["player_%d" % player.ID] = model_name
 
-        file.write("initial stack %d" % self.initial_stack)
-        file.write("blind value %d" % self.blind)
-        file.write("timeout %d" % self.timeout)
-        file.write("\n ###################\n STARTING GAME LOGGING \n###################\n")
+        log_dict = {**self.__get_game_metadata(),
+                    "tournament_ID": str(self.tournament_id),
+                    "game_date": str(datetime.now()),
+                    "player_models": models_dict,
+                    "game_history":self.game_logger
+                    }
 
-        for game_nb, game in enumerate(self.game_logger):
-           file.write("game nb: ",game_nb)
-
-           for round_number, round in enumerate(game['round logs']):
-               pass
-
+        with open(self.log_file, 'w') as outfile:
+            yaml.dump(log_dict, outfile, default_flow_style=False)
 
         return
 
@@ -398,6 +388,7 @@ class Game:
                 'others info': self.players_info,
                 'round history': self.round_logger,
                 'game history': self.game_logger[:-1]}
+
         # [:-1] -> very important to not give last round info (contains all the hands values)
 
     def display(self):
