@@ -1,6 +1,8 @@
 
 from copy import deepcopy
-from pktools.deuces import Evaluator, Deck, Card
+from pktools.deuces.evaluator import Evaluator
+from pktools.deuces.deck import Deck
+from pktools.deuces.card import Card
 from numpy import mean
 from random import shuffle
 
@@ -10,6 +12,10 @@ def set_deck(hand, board):
     return deck
 
 def estimate_proba(hand, board, n_player, n_simul=1000):
+
+    hand = Card.str_to_int(hand)
+    board = Card.str_to_int(board)
+
     evaluator = Evaluator()
     to_draw = 5-len(board)
     deck = set_deck(hand, board)

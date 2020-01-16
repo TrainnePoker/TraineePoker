@@ -201,11 +201,11 @@ class Game:
         if self.turn_nb == 0:
             pass
         elif self.turn_nb == 1:
-            self.community_cards += self.deck.draw(3)
+            self.community_cards += Card.int_to_str(self.deck.draw(3))
         elif self.turn_nb == 2:
-            self.community_cards += [self.deck.draw(1)]
+            self.community_cards += [Card.int_to_str(self.deck.draw(1))]
         elif self.turn_nb == 3:
-            self.community_cards += [self.deck.draw(1)]
+            self.community_cards += [Card.int_to_str(self.deck.draw(1))]
         elif self.turn_nb > 3:
             return
 
@@ -214,7 +214,7 @@ class Game:
         # we first compute the strength of each player's hand
         # warning: the evaluator gives value 0 to the best possible hand
         evaluator = Evaluator()
-        hand_strength = np.array([evaluator.evaluate(player.hand, self.community_cards)
+        hand_strength = np.array([evaluator.evaluate( Card.str_to_int(player.hand) , Card.str_to_int(self.community_cards))
                                   if player.round_status != 'out' else np.inf
                                   for player in self.players])
 
@@ -281,7 +281,7 @@ class Game:
 
         for player in self.players:
             if player.game_status == 'in':
-                player.new_round(hand=self.deck.draw(2), blind=self.blind)
+                player.new_round(hand=Card.int_to_str(self.deck.draw(2)), blind=self.blind)
 
         # running the 4 betting turns
         for _ in range(4):
@@ -302,9 +302,7 @@ class Game:
         # logging
         self.game_logger += [self.__get_round_info()]
         self.game_logger[-1]['round_history'] = self.round_logger
-        print(ranking)
-        print(type(ranking))
-        print(np.argwhere(ranking==0))
+
         self.game_logger[-1]["winner"] = np.where(ranking == 0)[0].tolist()
         self.display()
 
@@ -314,7 +312,7 @@ class Game:
         self.__update_community()
 
         print('\n turn %d' % self.turn_nb)
-        Card.print_pretty_cards(self.community_cards)
+        print(self.community_cards)
         print('\n actions:')
 
         # Betting round
@@ -373,8 +371,8 @@ class Game:
                     "game_history":self.game_logger
                     }
 
-        with open(self.log_file, 'w') as outfile:
-            yaml.dump(log_dict, outfile, default_flow_style=False)
+        with open(self.log_file, 'w', encoding='utf8') as outfile:
+            yaml.dump(log_dict, outfile, default_flow_style=False, allow_unicode=True)
 
         return
 
@@ -396,8 +394,8 @@ class Game:
 
             print("player %d: \t Stack: %d \t Bets: %d \t Status: %s "
                   %(player.ID, player.stack ,player.bet, player.round_status))
-            Card.print_pretty_cards(player.hand)
+            print(player.hand)
 
         print("community:")
-        Card.print_pretty_cards(self.community_cards)
+        print(self.community_cards)
 
