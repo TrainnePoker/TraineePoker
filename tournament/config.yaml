@@ -1,0 +1,5 @@
+small blind: 20
+big blind: 40
+minimum raise: 40
+timeout: 5
+initial stack: 1000

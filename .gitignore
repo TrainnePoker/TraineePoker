@@ -36,6 +36,7 @@ atlassian-ide-plugin.xml
 __pycache__/
 *.py[cod]
 *$py.class
+*history.yaml
 
 # Distribution / packaging
 .Python

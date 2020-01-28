@@ -11,7 +11,7 @@ def set_deck(hand, board):
     deck.cards = list( set(deck.cards)-set(hand)-set(board) )
     return deck
 
-def estimate_proba(hand, board, n_player, n_simul=1000):
+def estimate_proba(hand, board, n_player, n_simul=100):
 
     hand = Card.str_to_int(hand)
     board = Card.str_to_int(board)

@@ -6,8 +6,8 @@ import numpy as np
 import pandas as pd
 from tournament.timeout import timeout
 import yaml
-
-
+from tournament.get_poker_rules import read_config_file, default_rules
+from copy import deepcopy
 """
 Game pseudo_code:
 
@@ -19,6 +19,11 @@ loop -> Game starts round
              -> player updates status
     -> Game distributes round gains
 """
+
+
+# debug:
+# could be about betting the blind, check out what happens in term of pot eligibility when every body folds directly
+# in this attempt, we see that the last player to play hasn't bet (no blind neither). Which shouldn't be possible
 
 class Player:
     def __init__(self, model, ID, stack = 1000 ):
@@ -65,7 +70,7 @@ class Player:
         self.bet -= amount
         return amount
 
-    def make_decision(self, input, current_raise, minimum_raise, time_delay):
+    def make_decision(self, input_dict, current_raise, rules):
         """
         Here we call the decision algorithm, implement its decision or make
         sure it provides a legal decision
@@ -76,7 +81,7 @@ class Player:
         """
 
         try:
-            decision = timeout(time_delay=time_delay)(self.model)(input)
+            decision = timeout(time_delay=rules['timeout'])(self.model)(deepcopy(input_dict))
         except Exception:
             decision = 'timeout'
 
@@ -111,7 +116,7 @@ class Player:
                     self.__bet(to_bet)
                     print('player %d goes all in' % self.ID)
                 # check if the value corresponds to a legal raise
-                elif (to_bet + self.bet) >= (current_raise + minimum_raise):
+                elif (to_bet + self.bet) >= (current_raise + rules['minimum raise']):
                     self.__bet(to_bet)
                     print('player %d raises' % self.ID)
                 else:
@@ -121,7 +126,7 @@ class Player:
                                         a raise greater than %d.
                                         Instead got %s"""
                                      % ((calling_bet), self.stack,
-                                        (calling_bet + minimum_raise),str(to_bet)))
+                                        (calling_bet + rules['minimum raise']),str(to_bet)))
             except ValueError:
                 # here the output is neither 'fold', 'call', or a betting int
                 raise ValueError('output of decision algorithm must be fold, call or an int raise value'
@@ -129,29 +134,32 @@ class Player:
 
         return
 
-    def new_round(self, hand, blind=10):
+    def new_round(self, hand, blind):
 
-        self.round_status = 'in'
+        self.hand = hand
+
+        self.round_status = self.game_status
         self.bet = 0
         # blind
         self.__bet(blind)
-        self.hand = hand
 
 
 class Game:
 
-    def __init__(self,log_file, models: list, tournament_id: str = 'none'):
+    def __init__(self, log_file, models: list, config_file = None, tournament_id: str = 'none'):
+
+        if config_file is None:
+            self.rules = default_rules()
+        else:
+            self.rules = read_config_file(config_file)
 
         self.tournament_id = tournament_id
         self.initial_stack = 1000
-        self.blind = 10
-        self.minimum_raise = 10
-        self.timeout = 5 # in seconds
 
         self.deck = Deck()
         self.log_file = log_file
 
-        self.players = [Player(model=model, ID=ID, stack=self.initial_stack)
+        self.players = [Player(model=model, ID=ID, stack=self.rules['initial stack'])
                         for ID, model in enumerate(models)]
 
         self.community_cards = []
@@ -159,7 +167,7 @@ class Game:
         self.n_players = len(self.players)
         self.round_nb = 0
         self.turn_nb = 0
-        self.dealer = 0
+        self.first_player = 0
 
         self.players_info = [] # list of tuples [player ID][player feature]; player feature = (ID, last_action, stack, bet, round_status)
         self.round_logger = [] # list of list of tuple [turn nb][action nb][player feature]
@@ -184,10 +192,11 @@ class Game:
 
     def __get_game_metadata(self):
         return {'n_players': self.n_players,
-                'blind': self.blind,
-                'minimum raise': self.minimum_raise,
-                'timeout': self.timeout,
-                'initial stack': self.initial_stack}
+                'big blind': self.rules['big blind'],
+                'small blind': self.rules['small blind'],
+                'minimum raise': self.rules['minimum raise'],
+                'timeout': self.rules['timeout'],
+                'initial stack': self.rules['initial stack']}
 
     def __get_round_info(self):
         players_in = [i for i,player in enumerate(self.players) if player.game_status == 'in']
@@ -227,8 +236,10 @@ class Game:
 
     def __create_pots(self):
         """
-        We spread the bets into pots, so that player all in who couldn't match the raise
-        are eligible only to the smaller pots.
+        We use the side-pots structure (cf. the internet), to compute more easily
+        how to spread the money when the winner of the round was all in and
+        couldn't mach the highest raise.
+
         :return:
         """
         # we make sure there is a 0 bet
@@ -251,7 +262,7 @@ class Game:
         return pots
 
     def __distribute_pots(self, pots, ranking):
-
+        """"""
         for _, pot in pots.iterrows():
             eligible_ranks = ranking[pot.eligible]
             best_rank = min(eligible_ranks)
@@ -262,26 +273,37 @@ class Game:
 
     def __next_round(self):
 
-        # reinitializing/updating round data
+        # reinitializing/updating round specific parameters
 
-        self.players_info = [player.get_player_data() for player in self.players]
         self.round_logger = []
-
-        self.dealer += 1
+        self.first_player += 1
+        self.first_player %= self.n_players
         self.turn_nb = 0
-        self.dealer %= self.n_players
-
-        # distributing cards to players still in
         self.deck = Deck()
         self.community_cards = []
 
+        # distributing cards to players still in
         print('Starting round %d with players %s'
               % (self.round_nb, str([i for i,player in enumerate(self.players)
                                      if player.game_status == 'in'])))
 
-        for player in self.players:
+        nth_player = 0
+        for player_id in range(self.n_players):
+            player = self.players[(player_id + self.first_player) % self.n_players]
+
             if player.game_status == 'in':
-                player.new_round(hand=Card.int_to_str(self.deck.draw(2)), blind=self.blind)
+                if nth_player == 0:
+                    blind = self.rules['small blind']
+                elif nth_player == 1:
+                    blind = self.rules['big blind']
+                else:
+                    blind = 0
+
+                player.new_round(hand=Card.int_to_str(self.deck.draw(2)), blind=blind)
+
+                nth_player += 1
+
+        self.players_info = [player.get_player_data() for player in self.players]
 
         # running the 4 betting turns
         for _ in range(4):
@@ -298,6 +320,7 @@ class Game:
             if player.stack <= 0 and player.game_status != 'out':
                 player.game_status = 'out'
                 player.round_status = 'out'
+                player.hand = []
 
         # logging
         self.game_logger += [self.__get_round_info()]
@@ -318,8 +341,11 @@ class Game:
         # Betting round
 
         current_raise = max([player.bet for player in self.players]) # current raise value
-        who_plays = self.dealer # player starting to bet
+        who_plays = self.first_player # player starting to bet
         last_update = 0 # when was the last raise
+
+        if self.turn_nb == 0: # pre-flop round
+            who_plays = np.argmax([player.bet for player in self.players]) + 1
 
         # n_active_players is initialized by counting all the 'in' players
         # but update in the loop only for the out players.
@@ -334,10 +360,9 @@ class Game:
             # checks if player is still playing (excluding all in)
             if player.round_status == 'in':
 
-                player.make_decision(input=self.__make_input(player, current_raise),
+                player.make_decision(input_dict=self.__make_input(player, current_raise),
                                      current_raise=current_raise,
-                                     minimum_raise=self.minimum_raise,
-                                     time_delay=self.timeout)
+                                     rules=self.rules)
 
                 # updating the data for the input dict
                 player_data = player.get_player_data()
@@ -371,7 +396,7 @@ class Game:
                     "game_history":self.game_logger
                     }
 
-        with open(self.log_file, 'w', encoding='utf8') as outfile:
+        with open(self.log_file, 'a+', encoding='utf8') as outfile:
             yaml.dump(log_dict, outfile, default_flow_style=False, allow_unicode=True)
 
         return
