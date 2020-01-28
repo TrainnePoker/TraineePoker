@@ -3,11 +3,11 @@
 
 ## Principle of the project:
 
-    This project is first-of-all a sand box for AT trainees who want to try out new algorithms and
+ This project is first-of-all a sand box for AT trainees who want to try out new algorithms and
 methods during their freaky fridays. With this project, you can work on data engineering, data science
 and visualization tasks.
 
-    The other goal of the project is to create the best possible poker AI. For this, we created an environment (this git repo)
+ The other goal of the project is to create the best possible poker AI. For this, we created an environment (this git repo)
 to sore and test at regular interval the AIs developed. Here's the structure of this environment:
 
  This repository contains 3 directories:
@@ -22,18 +22,18 @@ to sore and test at regular interval the AIs developed. Here's the structure of 
 
 ## How to contribute
 
-    If you want to work on data science projects, you can contribute by developping new poker AIs, which will be used during the
+ If you want to work on data science projects, you can contribute by developping new poker AIs, which will be used during the
 simulations. For this, you must upload the python code of the model to the *models* directory. Your code much have
 a few prerequisites to be accepted (those are described in the next paragraph), and other than that, you have full freedome as to
 how you want to create your AI. To help you develop your AI, you will find tools in the pktools directory, created by data engineers.
-    If there are features you need for your AI, see if you can collaborate with a data engineer to create it.
+ If there are features you need for your AI, see if you can collaborate with a data engineer to create it.
 If you don't know how to get started, take a look at the first models present to get some inspiration!
 
-    If want to work on a data engineering project, you can contribute by adding features to the pktools package.
+ If want to work on a data engineering project, you can contribute by adding features to the pktools package.
 There's plenty of interesting tech to apply to this project (cython, gpu computation, cluster computation, ect.)
 
-Finally, if you want to work on visualization tools, you can apply it to processing the tournaments history.
-    The topics are completely open (could be AI's behavior analysis, leader's evolution, ect.)
+ Finally, if you want to work on visualization tools, you can apply it to processing the tournaments history.
+The topics are completely open (could be AI's behavior analysis, leader's evolution, ect.)
 
 
 ## Structure of a model:
